@@ -39,6 +39,14 @@ app.post("/articles", (req, res) => {
   });
 });
 
+app.delete("/articles", (req, res) => {
+  Article.deleteMany((error) => {
+    !error
+      ? res.send("Succesfully all the articles was removed")
+      : res.send(error);
+  });
+});
+
 app.listen(3000, () => {
   console.log("Server is listening on port 3000.");
 });
