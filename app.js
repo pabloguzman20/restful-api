@@ -22,9 +22,20 @@ const articleSchena = {
 };
 
 const Article = mongoose.model("Article", articleSchena);
+
 app.get("/articles", (req, res) => {
   Article.find({}, (error, result) => {
-    !error ? res.send(result): res.send(error);
+    !error ? res.send(result) : res.send(error);
+  });
+});
+
+app.post("/articles", (req, res) => {
+  const article = new Article({
+    title: req.body.title,
+    content: req.body.content,
+  });
+  article.save((error) => {
+    !error ? res.send("Succesfully added a new article.") : res.send(error);
   });
 });
 
